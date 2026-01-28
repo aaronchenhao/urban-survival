@@ -570,7 +570,7 @@ const App: React.FC = () => {
       {currentToast && <AchievementToast achievement={currentToast} onClose={handleToastClose} />}
 
       {gameState.stage === GameStage.INTRO && (
-        <div className="h-full flex items-center justify-center bg-[url('./assets/background.jpg')] bg-cover bg-center">
+        <div className="h-full flex items-center justify-center bg-[url('/assets/background.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 bg-black/80"></div>
             <div className="relative z-10 w-full h-full">
                  <StartScreen 
