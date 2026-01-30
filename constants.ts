@@ -252,7 +252,7 @@ export const GAME_NODES: GameNode[] = [
             },
             {
               id: 'n0-c-city-endure',
-              text: '硬抗忍受 (现金+500)',
+              text: '硬抗忍受，房东减租 (现金+500)',
               description: '穷人的修行。在噪音中冥想。省下了钱，但这种压抑正在积攒。',
               effects: [{ stat: 'body', value: -5 }, { stat: 'mind', value: -20 }, { stat: 'cash', value: 500 }], 
               nextEventId: 'n0-sub-city-endure'
@@ -280,6 +280,7 @@ export const GAME_NODES: GameNode[] = [
               text: '寻找公司附近床位 (现金-2000)',
               description: '极端操作。周一至周五住公司附近的胶囊旅馆，周末回郊区。虽然像个流浪汉，但效率极高。',
               effects: [{ stat: 'cash', value: -2000 }, { stat: 'performance', value: 15 }, { stat: 'mind', value: -10 }], 
+              flag: 'WEEKDAY_RENTER',
               nextEventId: 'n0-sub-suburb-move'
             }
           ];
@@ -348,9 +349,14 @@ export const GAME_NODES: GameNode[] = [
     marketTrend: 'FLAT',
     context: (flags) => {
       const isCity = flags.includes('RENT_CITY');
+      const isWeekdayRenter = flags.includes('WEEKDAY_RENTER'); // Check for specific suburb lifestyle
+
       if (isCity) {
           return `【市区：月光陷阱】\n入职第四个月。你住在繁华的中心，下楼就是便利店和酒吧。同事们下班总喜欢喊你聚餐，“反正你住得近”。\n虽然通勤轻松，但高昂的房租和无法拒绝的社交支出，让你成了标准的“月光族”。看着账户余额，你陷入了“假装中产”的焦虑。`;
       } else {
+          if (isWeekdayRenter) {
+              return `【双栖生活：异乡人】\n入职第四个月。周一到周五，你蜷缩在公司附近的胶囊舱里，听着隔壁的呼噜声入睡；周末回到远郊空荡荡的房子，像个定期打扫卫生的钟点工。\n虽然避开了通勤地狱，绩效也名列前茅，但这种把生活压缩到极致的“高效”，让你感觉自己正在异化成一个纯粹的工作零件。`;
+          }
           return `【远郊：时间黑洞】\n入职第四个月。你像是过着双重生活：白天是CBD的精英，晚上是城乡结合部的幽灵。\n每天到家已是九点，除了洗澡睡觉什么都做不了。父母打来电话问近况，你发现自己除了工作和地铁，大脑一片空白。你感觉自己正在废掉。`;
       }
     },

@@ -6,9 +6,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChoiceEffect } from '../types';
-import { Shield, TrendingUp, Home, Calculator, ChevronRight, Play, Terminal, Crown, AlertCircle, Trophy, BookOpen } from 'lucide-react';
+import { Shield, TrendingUp, Home, Calculator, ChevronRight, Play, Terminal, Crown, AlertCircle, Trophy, BookOpen, ShieldAlert } from 'lucide-react';
 import AchievementList from './AchievementList';
 import RulesModal from './RulesModal';
+import DisclaimerModal from './DisclaimerModal';
 
 interface StartScreenProps {
   onStart: (effects: ChoiceEffect[], flags: string[]) => void;
@@ -21,6 +22,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
   const [insurance, setInsurance] = useState<number | null>(null);
   const [hasLegacy, setHasLegacy] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
   
   // New Investment State
   const [safeInvest, setSafeInvest] = useState<number>(0);
@@ -137,6 +139,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
       <div className="max-w-xl mx-auto p-6 md:p-12 h-full flex flex-col justify-center animate-fade-in relative overflow-hidden">
         {/* Render Rules Modal */}
         {showRules && <RulesModal onClose={() => setShowRules(false)} />}
+        {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
 
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
         
@@ -173,22 +176,22 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
              </button>
 
              {/* Secondary Actions Row */}
-             <div className="flex items-center gap-6">
+             <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center w-full">
                 <button 
                     onClick={() => setShowRules(true)}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-cyan-400 transition-colors text-xs font-bold uppercase tracking-wider group"
+                    className="flex items-center gap-2 text-zinc-400 hover:text-cyan-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
                 >
                     <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-cyan-500/50 group-hover:bg-cyan-950/30 transition-all">
                         <BookOpen size={16} />
                     </div>
-                    <span className="border-b border-transparent group-hover:border-cyan-500/50 pb-0.5">城市生存手册</span>
+                    <span className="border-b border-transparent group-hover:border-cyan-500/50 pb-0.5">关于游戏</span>
                 </button>
 
-                <div className="w-px h-8 bg-zinc-800"></div>
+                <div className="hidden sm:block w-px h-8 bg-zinc-800"></div>
 
                 <button 
                     onClick={() => setView('TROPHY')}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-yellow-400 transition-colors text-xs font-bold uppercase tracking-wider group"
+                    className="flex items-center gap-2 text-zinc-400 hover:text-yellow-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
                 >
                     <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-yellow-500/50 group-hover:bg-yellow-950/30 transition-all relative">
                         <Trophy size={16} />
@@ -196,8 +199,19 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
                     </div>
                     <span className="border-b border-transparent group-hover:border-yellow-500/50 pb-0.5">成就图鉴</span>
                 </button>
-             </div>
 
+                <div className="hidden sm:block w-px h-8 bg-zinc-800"></div>
+
+                <button 
+                    onClick={() => setShowDisclaimer(true)}
+                    className="flex items-center gap-2 text-zinc-400 hover:text-rose-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
+                >
+                    <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-rose-500/50 group-hover:bg-rose-950/30 transition-all">
+                        <ShieldAlert size={16} />
+                    </div>
+                    <span className="border-b border-transparent group-hover:border-rose-500/50 pb-0.5">免责声明</span>
+                </button>
+             </div>
           </div>
           
           {hasLegacy && (
@@ -209,10 +223,12 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
         </div>
         
         {/* Footer */}
-        <div className="absolute bottom-6 left-0 w-full text-center space-y-3 z-20 px-4 pb-safe pointer-events-none">
-             <div className="flex items-center justify-center gap-2 text-[10px] text-white/40 font-medium tracking-wide">
-                <AlertCircle size={10} />
-                <span>免责声明：本游戏剧情纯属虚构，无任何现实关联。</span>
+        <div className="absolute bottom-4 left-0 w-full text-center z-20 px-4 pb-safe pointer-events-none flex flex-col items-center gap-1.5">
+             {/* Copyright & ICP */}
+             <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[9px] text-white/20 font-mono uppercase tracking-wider pointer-events-auto">
+                <span>© 2024 Cyber Execution Line. All Rights Reserved.</span>
+                <span className="hidden sm:inline opacity-50">|</span>
+                <a href="#" className="hover:text-white/40 transition-colors border-b border-transparent hover:border-white/40">京ICP备00000000号-X</a>
              </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ const RulesModal: React.FC<RulesModalProps> = ({ onClose }) => {
         <div className="p-4 border-b border-zinc-800 flex justify-between items-center bg-zinc-950">
           <div className="flex items-center gap-2 text-white font-bold">
             <HelpCircle size={20} className="text-cyan-500" />
-            <span>城市生存手册 (V3.1)</span>
+            <span>关于游戏 (V3.1)</span>
           </div>
           <button onClick={onClose} className="p-1 hover:bg-zinc-800 rounded-full text-zinc-400 transition-colors">
             <X size={20} />
@@ -94,7 +94,7 @@ const RulesModal: React.FC<RulesModalProps> = ({ onClose }) => {
             <div className="space-y-6 animate-fade-in">
               <div className="p-4 bg-emerald-950/20 border border-emerald-900/50 rounded">
                 <h3 className="text-emerald-400 font-bold mb-2">💰 结算周期</h3>
-                <p>游戏每推进 <span className="font-mono text-white">3</span> 个节点（约半年），会进行一次财务结算。</p>
+                <p>游戏每推进 <span className="font-mono text-white">3</span> 个节点（约半年），会进行一次财务结算，可重新进行配置。</p>
                 <ul className="list-disc list-inside mt-2 text-xs text-emerald-200/70 space-y-1">
                   <li>收入：发放6个月薪资（受绩效影响）</li>
                   <li>支出：扣除6个月房租与生活费（随通胀增加）</li>
