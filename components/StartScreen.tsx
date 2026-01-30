@@ -226,7 +226,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
         <div className="absolute bottom-4 left-0 w-full text-center z-20 px-4 pb-safe pointer-events-none flex flex-col items-center gap-1.5">
              {/* Copyright & ICP */}
              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[9px] text-white/20 font-mono uppercase tracking-wider pointer-events-auto">
-                <span>© 2024 Cyber Execution Line. All Rights Reserved.</span>
+                <span>© 2026 Cyber Execution Line. All Rights Reserved.</span>
                 <span className="hidden sm:inline opacity-50">|</span>
                 <a href="#" className="hover:text-white/40 transition-colors border-b border-transparent hover:border-white/40">京ICP备00000000号-X</a>
              </div>
