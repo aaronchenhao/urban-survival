@@ -1,0 +1,48 @@
+<view class="container">
+  <!-- 顶部装饰线 -->
+  <view class="top-line"></view>
+  
+  <!-- 主内容区 -->
+  <view class="content">
+    <!-- 版本标签 -->
+    <view class="version-tag">
+      <text class="version-icon">⌘</text>
+      <text class="version-text">系统版本 V3.1</text>
+    </view>
+    
+    <!-- 标题 -->
+    <view class="title-section">
+      <text class="main-title">赛博斩杀线</text>
+      <text class="sub-title">Cyber Execution Line</text>
+    </view>
+    
+    <!-- 引言 -->
+    <view class="quote-section">
+      <text class="quote-highlight">北漂青年，存款5万，期限24个月。</text>
+      <text class="quote-desc">在这座钢筋水泥的丛林中，
+你是数据，是耗材，还是幸存者？</text>
+    </view>
+    
+    <!-- 主按钮 -->
+    <view class="button-section">
+      <button class="btn-primary" bindtap="goToGame">
+        <text class="btn-text">访问官网</text>
+        <text class="btn-icon">›</text>
+      </button>
+    </view>
+  </view>
+  
+  <!-- 底部信息 -->
+  <view class="footer safe-area-bottom">
+    <view class="copyright">
+      <text>© 2026 Cyber Execution Line. All Rights Reserved.</text>
+    </view>
+    <view class="icp-section">
+      <text class="icp-text" bindtap="showPrivacy">京ICP备xxxxxxxx号-1X</text>
+      <text class="divider">|</text>
+      <text class="link-text" bindtap="showPrivacy">隐私政策</text>
+      <text class="divider">|</text>
+      <text class="link-text" bindtap="showTerms">使用条款</text>
+    </view>
+  </view>
+</view>

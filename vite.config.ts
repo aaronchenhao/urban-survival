@@ -6,8 +6,9 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
       server: {
-        port: 3000,
+        port: 5173,
         host: '0.0.0.0',
+        cors: true,
       },
       plugins: [react()],
       define: {
@@ -19,6 +20,13 @@ export default defineConfig(({ mode }) => {
           '@': path.resolve(__dirname, '.'),
         }
       },
-      base: './'
+      base: '/',
+      build: {
+        rollupOptions: {
+          output: {
+            format: 'es',
+          }
+        }
+      }
     };
 });

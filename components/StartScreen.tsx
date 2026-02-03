@@ -136,7 +136,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
   // --- LANDING VIEW ---
   if (view === 'LANDING') {
     return (
-      <div className="max-w-xl mx-auto p-6 md:p-12 h-full flex flex-col justify-center animate-fade-in relative overflow-hidden">
+      <div className="max-w-xl mx-auto p-6 md:p-12 h-full min-h-full flex flex-col justify-center animate-fade-in relative overflow-hidden">
         {/* Render Rules Modal */}
         {showRules && <RulesModal onClose={() => setShowRules(false)} />}
         {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}

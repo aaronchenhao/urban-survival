@@ -9,6 +9,15 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 
+// 初始化平台适配层（已禁用返回按钮功能）
+// setTimeout(() => {
+//   import('./platform').then(({ initPlatform }) => {
+//     initPlatform();
+//   }).catch(err => {
+//     console.error('[Platform] 初始化失败:', err);
+//   });
+// }, 0);
+
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");

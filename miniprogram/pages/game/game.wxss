@@ -1,0 +1,13 @@
+/* 游戏页样式 - WebView 全屏 */
+page {
+  height: 100vh;
+  width: 100vw;
+  background-color: #09090b;
+  overflow: hidden;
+}
+
+web-view {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
