@@ -14,6 +14,7 @@ import EndingScreen from './components/EndingScreen';
 import AmbientSound from './components/AmbientSound';
 import AchievementToast from './components/AchievementToast';
 
+
 // Helper to ensure stats stay within 0-100 (except cash/investments)
 const clampStat = (stat: string, value: number): number => {
   if (['body', 'mind', 'moral', 'performance'].includes(stat)) {

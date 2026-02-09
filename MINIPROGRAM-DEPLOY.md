@@ -125,7 +125,7 @@ globalData: {
 编辑 `miniprogram/pages/index/index.wxml` 第 35 行：
 
 ```xml
-<text class="icp-text" bindtap="showPrivacy">京ICP备xxxxxxxx号-1X</text>
+<text class="icp-text" bindtap="showPrivacy">浙ICP备2026008350号-1</text>
 ```
 
 替换为你的实际备案号。

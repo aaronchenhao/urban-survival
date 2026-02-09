@@ -38,7 +38,7 @@
       <text>© 2026 Cyber Execution Line. All Rights Reserved.</text>
     </view>
     <view class="icp-section">
-      <text class="icp-text" bindtap="showPrivacy">京ICP备xxxxxxxx号-1X</text>
+      <text class="icp-text" bindtap="showPrivacy">浙ICP备2026008350号-1</text>
       <text class="divider">|</text>
       <text class="link-text" bindtap="showPrivacy">隐私政策</text>
       <text class="divider">|</text>

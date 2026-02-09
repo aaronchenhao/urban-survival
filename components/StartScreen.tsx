@@ -6,10 +6,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { ChoiceEffect } from '../types';
-import { Shield, TrendingUp, Home, Calculator, ChevronRight, Play, Terminal, Crown, AlertCircle, Trophy, BookOpen, ShieldAlert } from 'lucide-react';
+import { Shield, TrendingUp, Home, Calculator, ChevronRight, Play, Terminal, Crown, AlertCircle, Trophy, BookOpen, ShieldAlert, Hash } from 'lucide-react';
 import AchievementList from './AchievementList';
 import RulesModal from './RulesModal';
 import DisclaimerModal from './DisclaimerModal';
+import PlatformsModal from './PlatformsModal';
 
 interface StartScreenProps {
   onStart: (effects: ChoiceEffect[], flags: string[]) => void;
@@ -23,6 +24,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
   const [hasLegacy, setHasLegacy] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [showPlatforms, setShowPlatforms] = useState(false);
   
   // New Investment State
   const [safeInvest, setSafeInvest] = useState<number>(0);
@@ -140,16 +142,12 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
         {/* Render Rules Modal */}
         {showRules && <RulesModal onClose={() => setShowRules(false)} />}
         {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
+        {showPlatforms && <PlatformsModal onClose={() => setShowPlatforms(false)} />}
 
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
         
         {/* Main Content Container */}
         <div className="relative z-10 text-center flex flex-col items-center flex-1 justify-center pb-12">
-          
-          <div className="inline-flex items-center gap-2 px-2 py-1 bg-zinc-800/50 border border-zinc-700 rounded text-[10px] font-mono text-zinc-400 mb-6 tracking-widest">
-            <Terminal size={12} />
-            系统版本 V3.1
-          </div>
           
           <h1 className="text-5xl md:text-6xl font-black mb-2 text-white tracking-tighter whitespace-nowrap drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
             赛博斩杀线
@@ -163,59 +161,58 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
             <p className="text-sm md:text-base text-zinc-400">在这个被黑暗丛林法则统治的城市里，<br/>你是数据，是耗材，还是幸存者？</p>
           </div>
 
-          {/* Centered Button Container - Clean Layout */}
-          <div className="flex flex-col items-center gap-6 w-full max-w-xs mx-auto">
+          {/* Centered Button Container - Stack Layout */}
+          <div className="flex flex-col items-center gap-4 w-full max-w-xs mx-auto z-20">
              
              {/* Start Button */}
              <button
                onClick={() => setView('CONFIG')}
-               className="group w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-black text-lg hover:bg-cyan-400 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] rounded-full hover:scale-105 active:scale-95"
+               className="group w-full flex items-center justify-center gap-3 px-8 py-4 bg-white text-black font-black text-lg hover:bg-cyan-400 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] rounded-lg hover:scale-[1.02] active:scale-95"
              >
-               <span>开始人生模拟</span>
-               <ChevronRight size={20} className="group-hover:translate-x-1 transition-transform" />
+               <Play size={24} fill="currentColor" />
+               <span>开始挑战</span>
              </button>
 
-             {/* Secondary Actions Row */}
-             <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center w-full">
-                <button 
-                    onClick={() => setShowRules(true)}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-cyan-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
-                >
-                    <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-cyan-500/50 group-hover:bg-cyan-950/30 transition-all">
-                        <BookOpen size={16} />
-                    </div>
-                    <span className="border-b border-transparent group-hover:border-cyan-500/50 pb-0.5">关于游戏</span>
-                </button>
+             {/* Secondary Actions Stack */}
+             <button 
+                onClick={() => setView('TROPHY')}
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-zinc-900/80 border border-zinc-700 text-zinc-300 font-bold hover:bg-zinc-800 hover:border-zinc-500 hover:text-white transition-all rounded-lg backdrop-blur-sm group relative"
+             >
+                <Trophy size={18} className="group-hover:text-yellow-400 transition-colors" />
+                <span>成就图鉴</span>
+                {unlockedAchievements.length > 0 && <div className="absolute top-2 right-2 w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div>}
+             </button>
 
-                <div className="hidden sm:block w-px h-8 bg-zinc-800"></div>
+             <button 
+                onClick={() => setShowPlatforms(true)}
+                className="w-full flex items-center justify-center gap-2 py-3.5 bg-zinc-900/80 border border-zinc-700 text-zinc-300 font-bold hover:bg-zinc-800 hover:border-emerald-500 hover:text-white transition-all rounded-lg backdrop-blur-sm group"
+             >
+                <Hash size={18} className="group-hover:text-emerald-400 transition-colors" />
+                <span>关注平台</span>
+             </button>
+          </div>
 
-                <button 
-                    onClick={() => setView('TROPHY')}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-yellow-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
-                >
-                    <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-yellow-500/50 group-hover:bg-yellow-950/30 transition-all relative">
-                        <Trophy size={16} />
-                        {unlockedAchievements.length > 0 && <div className="absolute top-0 right-0 w-2 h-2 bg-yellow-500 rounded-full border border-black"></div>}
-                    </div>
-                    <span className="border-b border-transparent group-hover:border-yellow-500/50 pb-0.5">成就图鉴</span>
-                </button>
+          {/* Tertiary Actions Row (Bottom) */}
+          <div className="flex items-center gap-6 mt-8 justify-center w-full z-20">
+            <button 
+                onClick={() => setShowRules(true)}
+                className="flex items-center gap-1.5 text-zinc-500 hover:text-cyan-400 transition-colors text-xs font-bold uppercase tracking-wider group"
+            >
+                <BookOpen size={14} />
+                <span className="border-b border-transparent group-hover:border-cyan-500/50 pb-0.5">关于游戏</span>
+            </button>
 
-                <div className="hidden sm:block w-px h-8 bg-zinc-800"></div>
-
-                <button 
-                    onClick={() => setShowDisclaimer(true)}
-                    className="flex items-center gap-2 text-zinc-400 hover:text-rose-400 transition-colors text-xs font-bold uppercase tracking-wider group shrink-0"
-                >
-                    <div className="p-2 bg-zinc-900 border border-zinc-700 rounded-full group-hover:border-rose-500/50 group-hover:bg-rose-950/30 transition-all">
-                        <ShieldAlert size={16} />
-                    </div>
-                    <span className="border-b border-transparent group-hover:border-rose-500/50 pb-0.5">免责声明</span>
-                </button>
-             </div>
+            <button 
+                onClick={() => setShowDisclaimer(true)}
+                className="flex items-center gap-1.5 text-zinc-500 hover:text-rose-400 transition-colors text-xs font-bold uppercase tracking-wider group"
+            >
+                <ShieldAlert size={14} />
+                <span className="border-b border-transparent group-hover:border-rose-500/50 pb-0.5">免责声明</span>
+            </button>
           </div>
           
           {hasLegacy && (
-             <div className="mt-8 flex items-center gap-2 text-yellow-500 font-mono text-xs animate-pulse bg-yellow-950/30 px-3 py-1 rounded-full border border-yellow-900/50">
+             <div className="mt-6 flex items-center gap-2 text-yellow-500 font-mono text-xs animate-pulse bg-yellow-950/30 px-3 py-1 rounded-full border border-yellow-900/50">
                  <Crown size={12} />
                  <span>检测到二周目继承 (NEW GAME+)</span>
              </div>
@@ -228,7 +225,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart, unlockedAchievements
              <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[9px] text-white/20 font-mono uppercase tracking-wider pointer-events-auto">
                 <span>© 2026 Cyber Execution Line. All Rights Reserved.</span>
                 <span className="hidden sm:inline opacity-50">|</span>
-                <a href="#" className="hover:text-white/40 transition-colors border-b border-transparent hover:border-white/40">京ICP备00000000号-X</a>
+                <a href="#" className="hover:text-white/40 transition-colors border-b border-transparent hover:border-white/40">浙ICP备2026008350号-1</a>
              </div>
         </div>
       </div>

@@ -117,8 +117,36 @@ const GameScreen: React.FC<GameScreenProps> = ({
   } else if (isSubEvent && subEventId && node.events && node.events[subEventId]) {
     const subEvent = node.events[subEventId];
     currentTitle = subEvent.title ? subEvent.title : node.title; 
-    currentContext = subEvent.context(flags, stats);
-    currentChoices = Array.isArray(subEvent.choices) ? subEvent.choices : subEvent.choices(flags, stats);
+    
+    // Fix: Call context function with correct number of parameters
+    if (typeof subEvent.context === 'function') {
+      const contextFn = subEvent.context;
+      if (contextFn.length === 2) {
+        currentContext = contextFn(flags, stats);
+      } else if (contextFn.length === 1) {
+        currentContext = contextFn(flags);
+      } else {
+        currentContext = contextFn();
+      }
+    } else {
+      currentContext = subEvent.context;
+    }
+    
+    // Fix: Call choices function with correct number of parameters or use as array
+    if (Array.isArray(subEvent.choices)) {
+      currentChoices = subEvent.choices;
+    } else if (typeof subEvent.choices === 'function') {
+      const choicesFn = subEvent.choices;
+      if (choicesFn.length === 2) {
+        currentChoices = choicesFn(flags, stats);
+      } else if (choicesFn.length === 1) {
+        currentChoices = choicesFn(flags);
+      } else {
+        currentChoices = choicesFn();
+      }
+    } else {
+      currentChoices = [];
+    }
   } else if (!isSimulationNode) {
     // Standard Node Choices
     currentChoices = node.choices ? (Array.isArray(node.choices) ? node.choices : node.choices(flags, stats)) : [];
